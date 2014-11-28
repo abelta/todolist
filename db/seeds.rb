@@ -14,3 +14,11 @@ user = User.first
 user.lists.create name: 'Groceries'
 user.lists.create name: 'Vacation'
 user.lists.create name: 'Work'
+
+list = User.first.lists.first
+
+list.items.create content: 'Lettuce'
+list.items.create content: 'Bread'
+list.items.create content: 'Milk'
+list.items.create content: 'Tomato'
+list.items.create content: 'Grounf beef'
