@@ -6,7 +6,7 @@
 
 <ul>
     <% @list.items.each do |item| %>
-        <li>
+        <li class="item" data-id="<%= item.id -%>">
             <a href="#" class="item_content"><%= item.content -%></a> -
             <a href="#" class="item_state <%= item.done? ? "done" : "pending" -%>"><%= item.done? ? "done" : "pending" -%></a>
         </li>

@@ -3,7 +3,9 @@
 <h2 class="user_title"><%= @user.name -%></h2>
 <ul>
     <% @user.lists.each do |list| %>
-        <li><a href="<%= url_for list -%>" class="list_name"><%= list.name -%> (<%= list.items.pending.count -%>)</a></li>
+        <li class="list" data-id="<%= list.id -%>">
+            <a href="<%= url_for list -%>" class="list_name"><%= list.name -%> (<%= list.items.pending.count -%>)</a>
+        </li>
     <% end %>
 </ul>
 
