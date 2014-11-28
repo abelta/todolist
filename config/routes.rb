@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  root 'users#show', :id => 1
+
   resources :items
 
   resources :lists

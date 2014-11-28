@@ -1,4 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<h2 class="user_title"><%= @user.name -%></h2>
+<ul>
+    <% @user.lists.each do |list| %>
+        <li><a href="#" class="list_name"><%= list.name -%> (<%= list.items.pending.count -%>)</a></li>
+    <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
