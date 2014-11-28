@@ -5,35 +5,41 @@ class Item
         console.log 'Item', @dom
 
         clickContentHandler = (e) =>
-            console.log 'clickContentHandler'
             do @editContent
             false
 
         clickStateHandler = (e) =>
-            console.log 'clickStateHandler'
             do @toggleState
             false
 
         @id = jQuery(@dom).data('id')
+        @done = jQuery(@dom).data('done')
         jQuery(@dom).find('.item_content').on 'click', clickContentHandler
         jQuery(@dom).find('.item_state').on 'click', clickStateHandler
+
+
+    update: (data, state) =>
+        @done = data.done
+        jQuery(@dom).find('.item_content').text( data.content )
+        jQuery(@dom).find('.item_state')
+            .text( if @done then 'done' else 'pending' )
+            .toggleClass('done')
+            .toggleClass('pending')
+
+
+    alertUpdateFail: ->
+        new window.Flash "Item could not be updated.", "error"
+
 
     editContent: ->
         console.log 'editContent'
 
+
     toggleState: ->
-        console.log 'toggleState'
-        updateState = ->
-            console.log 'updateState'
-            newText = jQuery(@).find('item_state').text() == 'pending' ? 'done' : 'pending'
-            jQuery(@dom).find('item_state')
-                .toggleClass('done')
-                .toggleClass('pending')
-                .text(newText)
-        done = jQuery(@dom).find('.item_state').hasClass('done')
         jQuery
-            .when( jQuery.ajax("/items/#{@id}.json", type:'PATCH', data: {item:{pending:!done}}) )
-            .then( do updateState )
+            .ajax( "/items/#{@id}.json", type:'PATCH', data: {item:{done:!@done}} )
+            .done( @update )
+            .fail( @alertUpdateFail )
 
 
 

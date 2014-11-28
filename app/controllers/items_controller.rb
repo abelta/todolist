@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
 
-    item_params = params[:item]
+    #item_params = params[:item]
 
     respond_to do |format|
       if @item.update(item_params)
