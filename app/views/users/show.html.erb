@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h2 class="user_title"><%= @user.name -%></h2>
-<ul>
+<ul data-user-id="<%= @user.id -%>">
     <% @user.lists.each do |list| %>
         <li class="list" data-id="<%= list.id -%>">
             <a href="<%= url_for list -%>" class="list_name"><%= list.name -%> (<%= list.items.pending.count -%>)</a>

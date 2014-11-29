@@ -2,9 +2,9 @@
 class Item
     
     constructor: (@dom) ->
-
         @id = jQuery(@dom).data('id')
         @done = jQuery(@dom).data('done')
+        @listId = jQuery(@dom).parents('ul').first().data('list-id')
         jQuery(@dom).find('.item_content').editable( @editContent )
         jQuery(@dom).find('.item_destroy').on 'click', => do @destroyRemote; false
         jQuery(@dom).find('.item_state').on 'click', => do @toggleState; false
@@ -21,20 +21,18 @@ class Item
 
     updateRemote: (data) ->
         jQuery
-            .ajax( "/items/#{@id}.json", type:'PATCH', data: {item:data} )
+            .ajax( "/lists/#{@listId}/items/#{@id}.json", type:'PATCH', data: {item:data} )
             .done( @updateLocal )
             .fail( @alertFail )
 
 
     destroyLocal: =>
-        console.log 'destroyLocal'
         jQuery(@dom).slideUp()
 
 
     destroyRemote: =>
-        console.log 'destroyRemote'
         jQuery
-            .ajax( "/items/#{@id}.json", type:'DELETE' )
+            .ajax( "/lists/#{@listId}/items/#{@id}.json", type:'DELETE' )
             .done( @destroyLocal )
             .fail( @alertFail )
 
@@ -48,7 +46,7 @@ class Item
 
 
     editContent: (value) =>
-        jQuery(@dom).find('.item_content').text('moco')
+        jQuery(@dom).find('.item_content').text(value)
         @updateRemote content:value
         value
 
