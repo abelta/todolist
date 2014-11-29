@@ -2,23 +2,14 @@
 class Item
     
     constructor: (@dom) ->
-        console.log 'Item', @dom
-
-        clickContentHandler = (e) =>
-            do @editContent
-            false
-
-        clickStateHandler = (e) =>
-            do @toggleState
-            false
 
         @id = jQuery(@dom).data('id')
         @done = jQuery(@dom).data('done')
-        jQuery(@dom).find('.item_content').on 'click', clickContentHandler
-        jQuery(@dom).find('.item_state').on 'click', clickStateHandler
+        jQuery(@dom).find('.item_content').editable( @editContent )
+        jQuery(@dom).find('.item_state').on 'click', => do @toggleState; false
 
 
-    update: (data, state) =>
+    updateLocal: (data) =>
         @done = data.done
         jQuery(@dom).find('.item_content').text( data.content )
         jQuery(@dom).find('.item_state')
@@ -27,19 +18,25 @@ class Item
             .toggleClass('pending')
 
 
+    updateRemote: (data) ->
+        jQuery
+            .ajax( "/items/#{@id}.json", type:'PATCH', data: {item:data} )
+            .done( @updateLocal )
+            .fail( @alertUpdateFail )
+
+
     alertUpdateFail: ->
         new window.Flash "Item could not be updated.", "error"
 
 
-    editContent: ->
-        console.log 'editContent'
-
-
     toggleState: ->
-        jQuery
-            .ajax( "/items/#{@id}.json", type:'PATCH', data: {item:{done:!@done}} )
-            .done( @update )
-            .fail( @alertUpdateFail )
+        @updateRemote done:!@done
+
+
+    editContent: (value) =>
+        jQuery(@dom).find('.item_content').text('moco')
+        @updateRemote content:value
+        value
 
 
 
