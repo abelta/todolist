@@ -6,6 +6,7 @@ class Item
         @id = jQuery(@dom).data('id')
         @done = jQuery(@dom).data('done')
         jQuery(@dom).find('.item_content').editable( @editContent )
+        jQuery(@dom).find('.item_destroy').on 'click', => do @destroyRemote; false
         jQuery(@dom).find('.item_state').on 'click', => do @toggleState; false
 
 
@@ -22,10 +23,23 @@ class Item
         jQuery
             .ajax( "/items/#{@id}.json", type:'PATCH', data: {item:data} )
             .done( @updateLocal )
-            .fail( @alertUpdateFail )
+            .fail( @alertFail )
 
 
-    alertUpdateFail: ->
+    destroyLocal: =>
+        console.log 'destroyLocal'
+        jQuery(@dom).slideUp()
+
+
+    destroyRemote: =>
+        console.log 'destroyRemote'
+        jQuery
+            .ajax( "/items/#{@id}.json", type:'DELETE' )
+            .done( @destroyLocal )
+            .fail( @alertFail )
+
+
+    alertFail: ->
         new window.Flash "Item could not be updated.", "error"
 
 
