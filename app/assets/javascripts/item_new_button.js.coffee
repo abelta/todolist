@@ -24,7 +24,9 @@ class ItemNewButton
 
 
     updateNewItem: (dom, data) =>
-        jQuery(dom).attr('data-id', data.content)
+        jQuery(dom).attr('data-id', data.id)
+        jQuery(dom).find('.item_content').off()
+        new Item dom
 
 
     saveNewItem: (value, template) =>

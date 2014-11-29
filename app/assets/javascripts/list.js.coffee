@@ -10,5 +10,9 @@ class List
 
 
 
+
+# EXPORT.
+window.List = List
+
 # MAIN.
 jQuery('.list').each -> new List(this)

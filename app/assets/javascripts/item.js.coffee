@@ -53,5 +53,8 @@ class Item
 
 
 
+# EXPORT.
+window.Item = Item
+
 # MAIN.
 jQuery('.item').each -> new Item(this)
