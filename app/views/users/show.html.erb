@@ -3,11 +3,12 @@
 <h2 class="user_title"><%= @user.name -%></h2>
 <ul data-user-id="<%= @user.id -%>">
     <% @user.lists.each do |list| %>
-        <li class="list" data-id="<%= list.id -%>">
-            <a href="<%= url_for list -%>" class="list_name"><%= list.name -%> (<%= list.items.pending.count -%>)</a>
+        <li>
+            <a class="list" data-id="<%= list.id -%>" href="<%= url_for list -%>">
+              <span class="list_name"><%= list.name -%></span>
+              <span class="list_count">(<%= list.items.pending.count -%>)</span>
+              <span class="list_destroy">Remove</span>
+            </a>
         </li>
     <% end %>
 </ul>
-
-<%# link_to 'Edit', edit_user_path(@user) %>
-<%# link_to 'Back', users_path %>

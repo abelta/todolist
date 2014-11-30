@@ -19,7 +19,8 @@ class ItemNewButton
         jQuery("#{ @target }").prepend template
         jQuery(template)
             .find('.item_content')
-            .editable( (value) => @saveNewItem value, template )
+            #.editable( (value) => @saveNewItem value, template )
+            .editable( ((value) => @saveNewItem value, template), select: true )
             .click()
 
 
@@ -30,10 +31,10 @@ class ItemNewButton
 
 
     saveNewItem: (value, template) =>
-        data = {content: value}
+        data = content: value
         listId = jQuery(@target).data('list-id')
         jQuery
-            .post( "/lists/#{listId}/items.json", {item: data} )
+            .post( "/lists/#{listId}/items.json", item: data )
             .done( (data) => @updateNewItem template, data )
             .fail( @alertFail )
         jQuery(template).find('.item_content').text(value)

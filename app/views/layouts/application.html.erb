@@ -6,6 +6,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <h1 class="application_title">To-Do List</h1>
+
   <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
   <% end -%>

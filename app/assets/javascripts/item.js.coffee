@@ -5,7 +5,7 @@ class Item
         @id = jQuery(@dom).data('id')
         @done = jQuery(@dom).data('done')
         @listId = jQuery(@dom).parents('ul').first().data('list-id')
-        jQuery(@dom).find('.item_content').editable( @editContent )
+        jQuery(@dom).find('.item_content').editable( @editContent, event: 'dblclick', select: true )
         jQuery(@dom).find('.item_destroy').on 'click', => do @destroyRemote; false
         jQuery(@dom).find('.item_state').on 'click', => do @toggleState; false
 
