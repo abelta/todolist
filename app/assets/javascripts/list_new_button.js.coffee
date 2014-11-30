@@ -40,6 +40,7 @@ class ListNewButton
             .post( "/lists.json", list: data )
             .done( (data) => @updateNewList template, data )
             .fail( @alertFail )
+        jQuery('.nothing_found').remove()
         jQuery(template).find('.list_name').text(value)
         value
 

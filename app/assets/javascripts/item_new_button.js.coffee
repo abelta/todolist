@@ -39,6 +39,7 @@ class ItemNewButton
             .post( "/lists/#{listId}/items.json", item: data )
             .done( (data) => @updateNewItem template, data )
             .fail( @alertFail )
+        jQuery('.nothing_found').remove()
         jQuery(template).find('.item_content').text(value)
         value
 
