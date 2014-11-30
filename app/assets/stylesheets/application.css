@@ -28,3 +28,7 @@ li {
     margin-bottom: 100px;
 }
 
+.flash .error {
+    font-weight: bold;
+    color: red;
+}

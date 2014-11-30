@@ -7,10 +7,12 @@ class ItemNewButton
 
     
     itemTemplate =
-        "<li class='item' data-done='false'>
-            <a href='#' class='item_content'>New item</a> -
-            <a href='#' class='item_state pending'>pending</a>
-            <a href='#' class='item_destroy'>Remove</a>
+        "<li>
+            <a href='#' class='item' data-done='false'>
+              <span class='item_content'>New item</span>
+              <span class='item_destroy'>Remove</span>
+              <span class='item_state pending'>Pending</span>
+            </a>
         </li>"
 
 
@@ -19,14 +21,14 @@ class ItemNewButton
         jQuery("#{ @target }").prepend template
         jQuery(template)
             .find('.item_content')
-            #.editable( (value) => @saveNewItem value, template )
             .editable( ((value) => @saveNewItem value, template), select: true )
             .click()
 
 
     updateNewItem: (dom, data) =>
-        jQuery(dom).attr('data-id', data.id)
-        jQuery(dom).find('.item_content').off()
+        jQuery(dom)
+            .attr('data-id', data.id)
+            .find('.item_content').off()
         new Item dom
 
 

@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h2 class="user_title"><%= @user.name -%></h2>
-<ul data-user-id="<%= @user.id -%>">
+
+<a href="#" class="system_button list_new" data-target="list_list">New list</a>
+
+<ul id="list_list" class="list_list" data-user-id="<%= @user.id -%>">
     <% @user.lists.each do |list| %>
         <li>
             <a class="list" data-id="<%= list.id -%>" href="<%= url_for list -%>">

@@ -10,12 +10,29 @@
     padding: 10px;
     background-color: lightgreen;
     border-radius: 4px;
+    text-decoration: none;
+    color: black;
 }
 
-.item a {
-    text-decoration: none;
+.item:visited {
+    color: black;
+}
+
+.item:hover {
+    color: white;
+    background-color: limegreen;
 }
 
 .item_name {}
 
-.item_destroy {}
+.item_state {
+    padding-left: 10px;
+    padding-right: 10px;
+    float: right;
+}
+
+.item_destroy {
+    padding-left: 10px;
+    padding-right: 10px;
+    float: right;
+}

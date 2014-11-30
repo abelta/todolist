@@ -2,16 +2,18 @@
 
 <h2 class="list_title"><%= @list.name -%></h2>
 
-<a href="#" class="item_new" data-target="item_list">New item</a>
+<a href="#" class="system_button item_new" data-target="item_list">New item</a>
 
 <% unless @list.items.count.zero? %>
 
     <ul id="item_list" class="item_list" data-list-id="<%= @list.id -%>">
         <% @list.items.each do |item| %>
-            <li class="item" data-id="<%= item.id -%>" data-done="<%= item.done -%>">
-                <a href="#" class="item_content"><%= item.content -%></a> -
-                <a href="#" class="item_state <%= item.done? ? "done" : "pending" -%>"><%= item.done? ? "done" : "pending" -%></a>
-                <a href="#" class="item_destroy">Remove</a>
+            <li>
+                <a href="#" class="item" data-id="<%= item.id -%>" data-done="<%= item.done -%>">
+                  <span class="item_content"><%= item.content -%></span>
+                  <span class="item_destroy">Remove</span>
+                  <span class="item_state <%= item.done? ? "done" : "pending" -%>"><%= item.done? ? "Done" : "Pending" -%></span>
+                </a>
             </li>
         <% end %>
     </ul>
